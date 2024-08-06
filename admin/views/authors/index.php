@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tag Management</title>
+  <title>author Management</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -10,7 +10,7 @@
     <!-- Page Heading -->
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800"><?= $title ?></h1>
-      <a href="<?= BASE_URL_ADMIN ?>?act=tag-create" class="btn btn-info btn-sm">
+      <a href="<?= BASE_URL_ADMIN ?>?act=author-create" class="btn btn-info btn-sm">
         <i class="fas fa-plus fa-sm text-white-50"></i> Create
       </a>
     </div>
@@ -34,6 +34,7 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>Action</th>
+                <th>Image</th>
               </tr>
             </thead>
             <tfoot>
@@ -41,21 +42,25 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>Action</th>
+                <th>Image</th>
               </tr>
             </tfoot>
             <tbody>
-              <?php foreach ($tags as $tag) : ?>
+              <?php foreach ($authors as $author) : ?>
                 <tr>
-                  <td><?= $tag['id'] ?></td>
-                  <td><?= $tag['name'] ?></td>
+                  <td><?= $author['id'] ?></td>
+                  <td><?= $author['name'] ?></td>
                   <td>
-                    <a href="<?= BASE_URL_ADMIN ?>?act=tag-detail&id=<?= $tag['id'] ?>" class="btn btn-info btn-sm btn-action">
+                    <img src="<?= BASE_URL . $author['avatar'] ?>" alt="" width="100px">
+                    </td>
+                  <td>
+                    <a href="<?= BASE_URL_ADMIN ?>?act=author-detail&id=<?= $author['id'] ?>" class="btn btn-info btn-sm btn-action">
                       <i class="fas fa-eye"></i>
                     </a>
-                    <a href="<?= BASE_URL_ADMIN ?>?act=tag-update&id=<?= $tag['id'] ?>" class="btn btn-warning btn-sm btn-action">
+                    <a href="<?= BASE_URL_ADMIN ?>?act=author-update&id=<?= $author['id'] ?>" class="btn btn-warning btn-sm btn-action">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <a href="<?= BASE_URL_ADMIN ?>?act=tag-delete&id=<?= $tag['id'] ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Are you sure you want to delete this tag?')">
+                    <a href="<?= BASE_URL_ADMIN ?>?act=author-delete&id=<?= $author['id'] ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Are you sure you want to delete this author?')">
                       <i class="fas fa-trash"></i>
                     </a>
                   </td>

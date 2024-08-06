@@ -78,7 +78,7 @@ function categoryUpdate($id)
     if (!empty($_POST)) {
 
         $data = [
-            "name" => $_POST['name']  ?? null,
+            "name" => $_POST['name']  ?? $category['name'],
         ];
 
         $errors = validateCategoryUpdate($id,$data);

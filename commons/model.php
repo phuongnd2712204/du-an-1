@@ -2,16 +2,18 @@
 
 // Crud -> create/read(Danh sách & chi tiết) / update/ delete
 if (!function_exists('get_str_keys')) {
-    function get_str_keys($data) {
+    function get_str_keys($data)
+    {
         return implode(',', array_keys($data));
     }
 }
 
 if (!function_exists('get_virtual_params')) {
-    function get_virtual_params($data) {
+    function get_virtual_params($data)
+    {
         $keys = array_keys($data);
         $tmp = [];
-        foreach ($keys as $key){
+        foreach ($keys as $key) {
             $tmp[] = ":$key";
         }
         return implode(',', $tmp);
@@ -19,10 +21,11 @@ if (!function_exists('get_virtual_params')) {
 }
 
 if (!function_exists('get_set_params')) {
-    function get_set_params($data) {
+    function get_set_params($data)
+    {
         $keys = array_keys($data);
         $tmp = [];
-        foreach ($keys as $key){
+        foreach ($keys as $key) {
             $tmp[] = "$key = :$key";
         }
         return implode(',', $tmp);
@@ -33,107 +36,103 @@ if (!function_exists('get_set_params')) {
 if (!function_exists('insert')) {
     function insert($tableName, $data = [])
     {
-       try {
-        $strKeys = get_str_keys($data);
-        $virtualParams = get_virtual_params($data);
-       
+        try {
+            $strKeys = get_str_keys($data);
+            $virtualParams = get_virtual_params($data);
 
 
-        $sql = "INSERT INTO  $tableName($strKeys) VALUES ($virtualParams)";
-        
-        $stmt = $GLOBALS['conn']->prepare($sql);
 
-        foreach ($data as $fieldName => &$value) {
-            $stmt->bindParam(":$fieldName", $value);
-        }
-        
-        $stmt->execute();
-       } catch(\Exception $e){
+            $sql = "INSERT INTO  $tableName($strKeys) VALUES ($virtualParams)";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            foreach ($data as $fieldName => &$value) {
+                $stmt->bindParam(":$fieldName", $value);
+            }
+
+            $stmt->execute();
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 
 if (!function_exists('listAll')) {
     function listAll($tableName)
     {
-       try {
+        try {
 
 
-        $sql = "SELECT * FROM $tableName ORDER BY id DESC";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $sql = "SELECT * FROM $tableName ORDER BY id DESC";
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->execute();
-        return $stmt->fetchAll();
-
-       } catch(\Exception $e){
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 
 if (!function_exists('showOne')) {
     function showOne($tableName, $id)
     {
-       try {
+        try {
 
 
-        $sql = "SELECT * FROM $tableName WHERE id = :id LIMIT 1";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $sql = "SELECT * FROM $tableName WHERE id = :id LIMIT 1";
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":id", $id);
 
-        $stmt->execute();
-        return $stmt->fetch();
-
-       } catch(\Exception $e){
+            $stmt->execute();
+            return $stmt->fetch();
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 
 if (!function_exists('update')) {
     function update($tableName, $id,  $data = [])
     {
-       try {
+        try {
 
-        $setParams = get_set_params($data);
+            $setParams = get_set_params($data);
 
 
-        $sql = "
+            $sql = "
         UPDATE $tableName 
         SET $setParams
         WHERE id = :id
           ";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        foreach ($data as $fieldName => &$value) {
-            $stmt->bindParam(":$fieldName", $value);
-        }
+            foreach ($data as $fieldName => &$value) {
+                $stmt->bindParam(":$fieldName", $value);
+            }
 
-        $stmt->bindParam(":id", $id);
-        
-        $stmt->execute();
+            $stmt->bindParam(":id", $id);
 
-       } catch(\Exception $e){
+            $stmt->execute();
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 if (!function_exists('delete')) {
     function delete2($tableName, $id)
     {
-       try {
-        $sql = "DELETE from $tableName WHERE id = :id";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+        try {
+            $sql = "DELETE from $tableName WHERE id = :id";
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->bindParam(":id", $id);
-        
-        $stmt->execute();
+            $stmt->bindParam(":id", $id);
 
-       } catch(\Exception $e){
+            $stmt->execute();
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 
@@ -142,22 +141,22 @@ if (!function_exists('checkUniqueName')) {
     // nếu trùng trả về false
     function checkUniqueName($tableName, $name)
     {
-       try {
+        try {
 
-        $sql = "SELECT * FROM $tableName WHERE name = :name LIMIT 1";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $sql = "SELECT * FROM $tableName WHERE name = :name LIMIT 1";
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":name", $name);
 
-        $stmt->execute();
+            $stmt->execute();
 
 
-        $data = $stmt->fetch();
+            $data = $stmt->fetch();
 
-        return empty($data) ? true : false;
-       } catch(\Exception $e){
+            return empty($data) ? true : false;
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }
 
@@ -166,22 +165,22 @@ if (!function_exists('checkUniqueNameForUpdate')) {
     // nếu trùng trả về false
     function checkUniqueNameForUpdate($tableName, $id, $name)
     {
-       try {
+        try {
 
-        $sql = "SELECT * FROM $tableName WHERE name = :name AND id <> :id LIMIT 1";
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $sql = "SELECT * FROM $tableName WHERE name = :name AND id <> :id LIMIT 1";
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":id", $id);
 
-        $stmt->execute();
+            $stmt->execute();
 
 
-        $data = $stmt->fetch();
+            $data = $stmt->fetch();
 
-        return empty($data) ? true : false;
-       } catch(\Exception $e){
+            return empty($data) ? true : false;
+        } catch (\Exception $e) {
             debug($e);
-       }
+        }
     }
 }

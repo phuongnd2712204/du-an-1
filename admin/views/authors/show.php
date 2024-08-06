@@ -17,14 +17,14 @@
                     <th>Dữ liệu</th>
 
                 </tr>
-                <?php foreach ($tag as $fieldName => $value) : ?>
+                <?php foreach ($author as $fieldName => $value) : ?>
                     <tr>
                         <td> <?= ucfirst($fieldName) ?></td>
                         <td> <?= $value ?></td>
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <a class="btn btn-info"href="<?=  BASE_URL_ADMIN ?>?act=tags">Back to list</a>
+            <a class="btn btn-info"href="<?=  BASE_URL_ADMIN ?>?act=authors">Back to list</a>
 
         </div>
     </div>

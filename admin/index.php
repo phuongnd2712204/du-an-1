@@ -14,7 +14,7 @@ require_file(PATH_MODEL_ADMIN);
 
 // Điều hướng
 $act = $_GET['act'] ?? '/';
-// debug($act);
+
 match($act){
     '/' => dashboard(),
     //CRUD user 
@@ -37,6 +37,20 @@ match($act){
     'tag-create' => tagCreate(),
     'tag-update' => tagUpdate($_GET['id']),
     'tag-delete' => tagDelete($_GET['id']),
+
+    //CRUD authur
+    'authors' => authorListAll(),
+    'author-detail' => authorShowOne($_GET['id']),
+    'author-create' => authorCreate(),
+    'author-update' => authorUpdate($_GET['id']),
+    'author-delete' => authorDelete($_GET['id']),
+
+     //CRUD Post
+     'posts' => postListAll(),
+     'post-detail' => postShowOne($_GET['id']),
+     'post-create' => postCreate(),
+     'post-update' => postUpdate($_GET['id']),
+     'post-delete' => postDelete($_GET['id']),
 };
 //...
 
