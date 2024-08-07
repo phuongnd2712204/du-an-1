@@ -12,11 +12,19 @@ require_file(PATH_CONTROLLER_ADMIN);
 require_file(PATH_MODEL_ADMIN);
 
 
+
 // Điều hướng
 $act = $_GET['act'] ?? '/';
+//kiểm tra user đăng nhâpj
+middleware_auth_check($act);
 
 match($act){
     '/' => dashboard(),
+    // phần login logout 
+    'login' => authenShowFormLogin(),
+    'logout' => authenLogout(),
+
+
     //CRUD user 
     'users' => userListAll(),
     'user-detail' => userShowOne($_GET['id']),
@@ -51,6 +59,10 @@ match($act){
      'post-create' => postCreate(),
      'post-update' => postUpdate($_GET['id']),
      'post-delete' => postDelete($_GET['id']),
+
+      // phần settings 
+      'setting-form' => settingShowForm(),
+      'setting-save' => settingSave(),
 };
 //...
 

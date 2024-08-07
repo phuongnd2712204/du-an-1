@@ -1,7 +1,14 @@
 <?php
 function getControllers(){
-    $users = getAllUser();
-   require_once PATH_VIEW . 'home.php';
+    $view = 'home';
+
+    $postTopView = postTopViewOnHome();
+    $postTop6latest = postTop6latestOnHome($postTopView['p_id']);
+    $postTop5Trendinglatest = postTop5Trendinglatest($postTopView['p_id']);
+
+
+
+   require_once PATH_VIEW . 'layouts/master.php';
 }
 // luồng MVC 1
 // Vào index được điều hướng đến hàm xử lý logic trong controller tương ứng

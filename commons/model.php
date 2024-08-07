@@ -3,8 +3,15 @@
 // Crud -> create/read(Danh sách & chi tiết) / update/ delete
 if (!function_exists('get_str_keys')) {
     function get_str_keys($data)
-    {
-        return implode(',', array_keys($data));
+    {       
+        $keys = array_keys($data);
+
+        $keysTenTen = array_map(function ($key) {
+            return "`$key`";
+        }, $keys);
+
+        return implode(',', $keysTenTen);
+
     }
 }
 

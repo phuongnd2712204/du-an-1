@@ -94,5 +94,18 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-user"></i>
+                    <span>settings</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=setting-form">Danh sách</a>
+                        <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=post-create">Thêm mới</a>
+                    </div>
+                </div>
+            </li>
+
             
         </ul>
