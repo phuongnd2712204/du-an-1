@@ -72,29 +72,28 @@
                   <td><?= $post['c_name'] ?></td>
                   <td>
                     <div style="display: flex">
-                      <img src="<?= $post['avatar']?>" alt="" width="100px">
+                      <img src="<?= $post['au_avatar']?>" alt="" width="100px">
                       <p><?= $post['au_name']?></p>
                     </div>
                   </td>
                   <td>
-                  <img src="<?= BASE_URL . $post['p_img_thumbnail']?>" width="100px" alt="">
+                  <img src="<?=BASE_URL . $post['p_img_thumnail']?>" width="100px" alt="">
 
                   </td>
                   <td>
-                    <img src="<?= BASE_URL . $post['p_img_cover']?>" width="100px" alt="">
+                    <img src="<?=BASE_URL . $post['p_img_cover']?>" width="100px" alt="">
                   </td>
                   <td><?= $post['p_status']?></td>
                   
-                  
+                
                   <td>
-                    <?= $post['p_is_trending'] ? '<span class="badge badge-success">Yes</span>'
-                    : '<span class="badge badge-warning">no</span>' ?>
-                  </td>
+                                    <?= $post['p_is_trending'] 
+                                            ? '<span class="badge badge-success">Yes</span>' 
+                                                : '<span class="badge badge-warning">No</span>' ?>
+                    </td>
                   <td><?= $post['p_created_at']?></td>
-                  <td><?= $post['p_undated_at']?></td>
-                  <td>
-                    <img src="<?= BASE_URL . $post['avatar'] ?>" alt="" width="100px">
-                  </td>
+                  <td><?= $post['p_updated_at']?></td>
+                  
                   <td>
                     <a href="<?= BASE_URL_ADMIN ?>?act=post-detail&id=<?= $post['p_id'] ?>" class="btn btn-info btn-sm btn-action">
                       <i class="fas fa-eye">Show</i>

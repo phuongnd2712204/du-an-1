@@ -31,15 +31,29 @@ if (!function_exists('e404')) {
 }
 
 
+
 if (!function_exists('upload_file')) {
     function upload_file($file, $pathFolderUpload)
     {
-            $imgPath = 'uploads/authurs/' . time() . '-' . basename($file['name']);
+        $imagePath = $pathFolderUpload . time() . '-' . basename($file['name']);
 
-            if (move_uploaded_file($file['tmp_name'], PATH_UPLOAD . $imgPath)) {
-                return $imgPath;
-            }
-            return null;
+        if (move_uploaded_file($file['tmp_name'], PATH_UPLOAD . $imagePath)) {
+            return $imagePath;
+        }
+
+        return null;
+    }
+}
+
+
+if (!function_exists('get_file_upload')) {
+    function get_file_upload($field, $default = null)
+    {
+        if(isset($_FILES[$field]) && $_FILES[$field]['size'] > 0) {
+            return $_FILES[$field];
+        }
+            return  $default ?? null;
     
     }
 }
+

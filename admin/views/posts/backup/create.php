@@ -2,61 +2,75 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title ?></h1>
 
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Create
+                DataTables Example
             </h6>
         </div>
         <div class="card-body">
-
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-success">
+                    <?= $_SESSION['success'] ?>
+                </div>
+                <?php unset($_SESSION['success']) ?>
+            <?php endif; ?>
             <?php if (isset($_SESSION['errors'])) : ?>
                 <div class="alert alert-danger">
                     <ul>
                         <?php foreach ($_SESSION['errors'] as $error) : ?>
-                            <li><?= $error ?></li>
+                            <li> <?= $error ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <?php unset($_SESSION['errors']); ?>
+                <?php unset($_SESSION['errors']) ?>
             <?php endif; ?>
-
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
-                            <label for="title" class="form-label">Title:</label>
-                            <input type="text" class="form-control" id="title" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['title'] : null ?>" placeholder="Enter title" name="title">
+                            <label for="title" class="form-lable">title:</label>
+                            <input type="text" class="form-control" id="title" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['title'] : null ?>" placeholder="Enter name" name="title">
                         </div>
-                        <div class="mb-3 mt-3">
-                            <label for="excerpt" class="form-label">Excerpt:</label>
-                            <textarea class="form-control" id="excerpt" rows="7" name="excerpt"><?= isset($_SESSION['data']) ? $_SESSION['data']['excerpt'] : null ?></textarea>
+
+                        <div class="mb-3 mt-3>
+                            <div class="mb-3 mt-3">
+                                <label for="excerpt" class="form-lable">Excerpt:</label>
+                                <textarea class="form-control" id="excerpt" rows="7" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['excerpt'] : null ?>" placeholder="Enter excerpt" name="excerpt"></textarea>
+                            </div>
                         </div>
-                        <div class="mb-3 mt-3">
-                            <label for="img_thumnail" class="form-label">Img_Thumnail:</label>
-                            <input type="file" class="form-control" id="img_thumnail" name="img_thumnail">
+                        <div class="mb-3 mt-3>
+                            <div class="mb-3 mt-3">
+                                <label for="img_thumbnail" class="form-lable">img_thumbnail:</label>
+                                <input type="file" class="form-control" id="img_thumbnail" name="img_thumbnail">
+                            </div>
                         </div>
-                        <div class="mb-3 mt-3">
-                            <label for="img_cover" class="form-label">Img_Cover:</label>
-                            <input type="file" class="form-control" id="img_cover" name="img_cover">
+                        <div class="mb-3 mt-3>
+                            <div class="mb-3 mt-3">
+                                <label for="img_cover" class="form-lable">img_cover:</label>
+                                <input type="file" class="form-control" id="img_cover" name="img_cover">
+                            </div>
                         </div>
                     </div>
 
+
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
-                            <label for="category_id" class="form-label">Category:</label>
+                            <label for="category_id" class="form-lable">category:</label>
                             <select class="form-control" id="category_id" name="category_id">
                                 <?php foreach ($categories as $category) : ?>
-                                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                    <option value="<?= $category['id'] ?>"> <?= $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
+
                         <div class="mb-3 mt-3">
-                            <label for="author_id" class="form-label">Category:</label>
+                            <label for="author_id" class="form-lable">author:</label>
                             <select class="form-control" id="author_id" name="author_id">
                                 <?php foreach ($authors as $author) : ?>
-                                    <option value="<?= $author['id'] ?>"><?= $author['name'] ?></option>
+                                    <option value="<?= $author['id'] ?>"> <?= $author['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -82,23 +96,28 @@
                                 <option value="1">Yes</option>
                             </select>
                         </div>
+                        
                     </div>
-
                     <div class="col-md-12">
                         <div class="mb-3 mt-3">
                             <label for="content" class="form-label">Content:</label>
                             <textarea id="content" name="content"><?= isset($_SESSION['data']) ? $_SESSION['data']['content'] : null ?></textarea>
                         </div>
                     </div>
+
+
                 </div>
 
+
+
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="<?= BASE_URL_ADMIN ?>?act=posts" class="btn btn-danger">Back to list</a>
+                <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>?act=authors">Back to list</a>
             </form>
+
+
         </div>
     </div>
 </div>
-
-<?php if (isset($_SESSION['data'])) {
-    unset($_SESSION['data']);
-} ?>
+<?php
+if (isset($_SESSION['data'])) unset($_SESSION['data']);
+?>
