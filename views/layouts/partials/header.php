@@ -1,32 +1,21 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="<?php BASE_URL?>" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1><?= $GLOBALS['settings']['logo'] ?? null ?>phuongnd</h1>
+        <h1><?= $GLOBALS['settings']['logo'] ?? null ?></h1>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html">Blog</a></li>
-          <li><a href="single-post.html">Single Post</a></li>
-          <li class="dropdown"><a href="category.html"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="<?php BASE_URL ?>">Trang chủ</a></li>
+          <li class="dropdown"><a href="<?php BASE_URL?>">
+            <span>Danh mục</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="search-result.html">Search Result</a></li>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <?php foreach($categoriesForMenu as $item) :?>
+              <li><a href="<?php BASE_URL?> ?act=category&id=<?=$item['id']?>"><?= $item['name']?></a></li>
+            <?php endforeach;?>
             </ul>
           </li>
 
@@ -36,7 +25,7 @@
       </nav><!-- .navbar -->
 
       <div class="position-relative">
-        <a href="<?= $GLOBALS['settings']['logo'] ?? null ?>" class="mx-2"><span class="bi-facebook"></span></a>
+        <a href="" class="mx-2"><span class="bi-facebook"></span></a>
         <a href="<?= $GLOBALS['settings']['logo'] ?? null ?>" class="mx-2"><span class="bi-twitter"></span></a>
         <a href="<?= $GLOBALS['settings']['logo'] ?? null ?>" class="mx-2"><span class="bi-instagram"></span></a>
 

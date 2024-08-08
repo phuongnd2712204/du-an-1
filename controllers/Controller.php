@@ -5,9 +5,9 @@ function getControllers(){
     $postTopView = postTopViewOnHome();
     $postTop6latest = postTop6latestOnHome($postTopView['p_id']);
     $postTop6latest = array_chunk($postTop6latest, 3);
-    // debug($postTop6latest);
-    $postTop5Trendinglatest = postTop5Trendinglatest($postTopView['p_id']);
-
+    //
+    $postTop5Trending = postTop5TrendingLatest($postTopView['p_id']);
+    // debug($postTop5Trending);
 
 
    require_once PATH_VIEW . 'layouts/master.php';

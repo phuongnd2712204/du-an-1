@@ -16,12 +16,24 @@ require_file(PATH_MODEL);
 
 
 // Điều hướng
-$act = $_GET['act'] ?? '/';
 // debug($act);
-match($act){
-    '/' => getControllers(),
-    
-};
+$act = $_GET['act'] ?? '/';
+
+switch ($act) {
+    case '/':
+        getControllers();
+        break;
+    case 'post':
+        blogDetail($_GET['id']);
+        break;
+    case 'category':
+        blogListByDanhMucID($_GET['id']);
+        break;
+    default:
+        // Xử lý khi không hiển thị ra trang
+        echo "Không tìm thấy trang";
+        break;
+}
 //...
 
 

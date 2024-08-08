@@ -82,6 +82,8 @@ if (!function_exists('settings')) {
 
 
        $data = array_combine($keys, $values);
+
+       return $data;
        //['logio' => Zenblog]
     }
 }

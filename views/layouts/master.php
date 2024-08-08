@@ -39,6 +39,7 @@
 </head>
 
 <body>
+<?php $categoriesForMenu = listAll('categories') ?>
 
   <!-- ======= Header ======= -->
   <?php require_once PATH_VIEW . 'layouts/partials/header.php'; ?>
